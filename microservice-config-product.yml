@@ -1,0 +1,78 @@
+spring: 
+  profiles:
+  #激活开发环境配置
+    active: dev
+---
+server: 
+  #端口号   
+  port: 6001     
+  
+mybatis: 
+  config-location: classpath:mybatis/mybatis.cfg.xml 
+  type-aliases-package: com.microservice.domain 
+  mapper-locations: classpath:mybatis/mapper/**/*.xml  
+spring: 
+  #开发环境 
+  profiles: dev 
+  application: 
+     #服务名
+    name: microservice-product-config
+  datasource: 
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库连接地址
+    url: jdbc:mysql://127.0.0.1:3306/microservice_db?serverTimezone=GMT%2B8
+    username: root 
+    password: 123456
+    dbcp2: 
+      min-idle: 5 
+      initial-size: 5 
+      max-total: 5 
+      max-wait-millis: 150
+eureka: 
+  client:
+  registerWithEureka: true 
+  fetchRegistry: true 
+  serviceUrl:
+    defaultZone: http://eureka1.com:6001/eureka
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+---
+server: 
+  #端口号   
+  port: 6001     
+  
+mybatis: 
+  config-location: classpath:mybatis/mybatis.cfg.xml 
+  type-aliases-package: com.microservice.domain 
+  mapper-locations: classpath:mybatis/mapper/**/*.xml  
+spring: 
+  #生产环境
+  profiles: prod 
+  application: 
+     #服务名
+    name: microservice-product-config
+  datasource: 
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库连接地址
+    url: jdbc:mysql://127.0.0.1:3306/microservice_db1?serverTimezone=GMT%2B8
+    username: root 
+    password: 123456
+    dbcp2: 
+      min-idle: 5 
+      initial-size: 5 
+      max-total: 5 
+      max-wait-millis: 150
+eureka: 
+  client:
+  registerWithEureka: true 
+  fetchRegistry: true 
+  serviceUrl:
+    defaultZone: http://eureka1.com:6001/eureka
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+---
+    
