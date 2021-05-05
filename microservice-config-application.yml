@@ -1,0 +1,24 @@
+#注意：如果在记事本上编写，下面的缩进不要使用Tab来缩进，不然报错
+spring: 
+  profiles:
+   #激活开发环境配置
+    active: dev
+---
+server: 
+  #端口号    
+  port: 4001
+spring: 
+  #开发环境  
+  profiles: dev
+  application: 
+    name: microservice-config-dev
+---    
+server: 
+ #端口号    
+  port: 4002
+spring: 
+#生产环境  
+  profiles: prod
+  application:
+    name: microservice-config-prod
+
